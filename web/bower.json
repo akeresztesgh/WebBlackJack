@@ -1,0 +1,21 @@
+{
+  "name": "WebBlackJack",
+  "version": "0.0.0",
+  "homepage": "https://github.com/akeresztesgh/WebBlackJack",
+  "authors": [
+    "AJ Keresztes <akeresztes@ibs.com>"
+  ],
+  "main": "app.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.5.4",
+    "angular-ui": "~0.4.0"
+  }
+}

@@ -1,0 +1,11 @@
+.DS_Store
+.idea
+.sublime-grunt.cache
+node_modules
+bower_components
+dist
+.tmp
+*.log
+*.css
+web/report
+web/app/index.html
