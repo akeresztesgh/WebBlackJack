@@ -7,13 +7,17 @@
         <!-- endinject -->
     </head>
     <body ng-app='app'>
-
+        <ui-view></ui-view>
+        
         <!-- bower:js -->
         <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
         <!-- endbower -->
         <!-- inject:js -->
         <script src="/app/app.js"></script>
         <script src="/app/partial/partial.module.js"></script>
+        <script src="/app/partial/home/home.js"></script>
+        <script src="/app/partial/home/home.routes.js"></script>
         <!-- endinject -->
     </body>
 </html>

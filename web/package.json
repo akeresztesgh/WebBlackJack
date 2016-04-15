@@ -15,5 +15,7 @@
     "gulp-util": "^3.0.7",
     "wiredep": "^4.0.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "gulp-server-livereload": "^1.7.4"
+  }
 }
