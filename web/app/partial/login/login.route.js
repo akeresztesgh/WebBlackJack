@@ -4,15 +4,15 @@
     angular.module('app.partial')
         .config(function($stateProvider){
             $stateProvider
-                .state('home', {
-                    url: '/home',
+                .state('login', {
+                    url: '/login',
                     abstract: true,
-                    templateUrl: 'app/partial/app.template.html'
+                    templateUrl: 'app/partial/blank.template.html'
                 })
-                .state('home.home', {
+                .state('login.login', {
                     url: '',
-                    templateUrl: 'app/partial/home/home.html',
-                    controller: 'HomeCtrl',
+                    templateUrl: 'app/partial/login/login.html',
+                    controller: 'LoginCtrl',
                     controllerAs: 'vm'
                 });
         });

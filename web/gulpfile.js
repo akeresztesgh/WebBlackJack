@@ -12,15 +12,22 @@ var jshint = require('gulp-jshint');
 var jshintStylish = require('jshint-stylish');
 
 // TODO: Add bundling / minify js & css...  browserify & babel?
+// TODO: auto-create app.less file imports, fix auto reload of less files
 
-gulp.task('serve', ['inject'], function(){
+gulp.task('serve', ['inject', 'less-watcher'], function(){
     return gulp.src('')
         .pipe(liveReload({
-          livereload: true,
+          //livereload: true,
           directoryListing: false,
           open: true,
           port: 1010,
-          defaultFile: 'index.html'
+          defaultFile: 'index.html',
+          livereload: {
+            enable: true,
+            filter: function (filename, cb) {
+                cb(!/\.(sa|le)ss$|node_modules/.test(filename));
+            }
+          },
         }));
 });
 
@@ -62,6 +69,11 @@ gulp.task('jshint', function(){
         .pipe(jshint.reporter(jshintStylish))
         .pipe(jshint.reporter('fail'));
 });
+
+gulp.task('less-watcher', function() {
+    gulp.watch([config.less], ['less-styles']);
+});
+
 
 gulp.task('clean', function(done){
     return del([config.css], done);

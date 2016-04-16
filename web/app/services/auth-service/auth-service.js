@@ -5,7 +5,7 @@
         .module('app.services')
         .factory('authService', authService);
 
-    function authService($http, $q, $log, localStorageService, config, jwtHelper) {
+    function authService($http, $q, $log, localStorageService, apiUrl, jwtHelper) {
 
         var authentication = {
             isAuth: false,
@@ -24,7 +24,7 @@
                        '&password=' + loginData.password;
             var deferred = $q.defer();
 
-            $http.post(config.apiUrl + '/token', data, {
+            $http.post(apiUrl + '/token', data, {
                         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
             .then(function(response){

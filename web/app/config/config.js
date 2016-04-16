@@ -3,5 +3,5 @@
     'use strict';
 
     angular.module('app')
-        .constant('backendUrl', 'http://localhost:55571/');
+        .constant('apiUrl', 'http://localhost:1011/');
 })();
