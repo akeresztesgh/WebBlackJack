@@ -8,4 +8,7 @@ dist
 *.log
 *.css
 web/report
-web/app/index.html
+build
+web/src/client/specs.html
+web/src/client/index.html
+*.orig
