@@ -9,6 +9,6 @@ dist
 *.css
 web/report
 build
-web/src/client/specs.html
-web/src/client/index.html
+web/specs.html
+web/index.html
 *.orig
