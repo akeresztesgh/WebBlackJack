@@ -6,9 +6,15 @@ var rename = require("gulp-rename");
 var gutil = require('gulp-util');
 var liveReload = require('gulp-server-livereload');
 var less = require('gulp-less');
+var del = require('del');
+var series = require('stream-series');
+var jshint = require('gulp-jshint');
+var jshintStylish = require('jshint-stylish');
+
+// todo: jshint
 
 gulp.task('serve', ['inject'], function(){
-    gulp.src('')
+    return gulp.src('')
         .pipe(liveReload({
           livereload: true,
           directoryListing: false,
@@ -29,10 +35,13 @@ gulp.task('inject', ['wiredep', 'less-styles'], function(){
 gulp.task('wiredep', function(){
     log('Wiring up bower and injecting application');
 
+    var appJs = gulp.src(config.appJs, {read:false});
+    var modules = gulp.src(config.jsModules, {read: false});
+    var otherJs = gulp.src(config.normalJs, {read: false});
+
     return gulp.src(config.templateIndex)
         .pipe(wiredep({}))
-        // todo: control order of module.js etc
-        .pipe(inject(gulp.src(config.allJs, {read: false})))
+        .pipe(inject(series(appJs, modules, otherJs)))
         .pipe(rename(config.index))
         .pipe(gulp.dest('./'));
 });
@@ -43,6 +52,19 @@ gulp.task('less-styles', function() {
     return gulp.src(config.less)
         .pipe(less())
         .pipe(gulp.dest(config.tmp));
+});
+
+gulp.task('jshint', function(){
+    log('performing jshint on js files');
+
+    return gulp.src(config.allJs)
+        .pipe(jshint())
+        .pipe(jshint.reporter(jshintStylish))
+        .pipe(jshint.reporter('fail'));
+});
+
+gulp.task('clean', function(done){
+    return del([config.css], done);
 });
 
 function log(msg) {

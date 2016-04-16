@@ -2,7 +2,7 @@
     'use strict';
 
      angular.module('app.partial')
-        .controller('HomeCtrl', HomeCtrl)
+        .controller('HomeCtrl', HomeCtrl);
 
         function HomeCtrl() {
             var vm = this;
