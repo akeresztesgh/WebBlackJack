@@ -11,7 +11,7 @@ var series = require('stream-series');
 var jshint = require('gulp-jshint');
 var jshintStylish = require('jshint-stylish');
 
-// todo: jshint
+// TODO: Add bundling / minify js & css...  browserify & babel?
 
 gulp.task('serve', ['inject'], function(){
     return gulp.src('')
