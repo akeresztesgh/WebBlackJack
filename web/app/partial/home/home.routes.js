@@ -15,12 +15,5 @@
                     controller: 'HomeCtrl',
                     controllerAs: 'vm'
                 });
-
-                // .state('home', {
-                //     url: '',
-                //     templateUrl: 'app/partial/home/home.html',
-                //     controller: 'HomeCtrl',
-                //     controllerAs: 'vm'
-                // });
         });
 })();

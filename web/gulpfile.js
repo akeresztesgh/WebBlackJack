@@ -5,8 +5,9 @@ var inject = require('gulp-inject');
 var rename = require("gulp-rename");
 var gutil = require('gulp-util');
 var liveReload = require('gulp-server-livereload');
+var less = require('gulp-less');
 
-gulp.task('serve', ['wiredep'], function(){
+gulp.task('serve', ['inject'], function(){
     gulp.src('')
         .pipe(liveReload({
           livereload: true,
@@ -17,14 +18,31 @@ gulp.task('serve', ['wiredep'], function(){
         }));
 });
 
-gulp.task('wiredep', function(){
-    log('Wiring up bower and injecting application js / css');
+gulp.task('inject', ['wiredep', 'less-styles'], function(){
+    log('Injecting CSS');
 
-    gulp.src(config.templateIndex)
+    return gulp.src(config.index)
+        .pipe(inject(gulp.src(config.css, {read: false})))
+        .pipe(gulp.dest('./'));
+});
+
+gulp.task('wiredep', function(){
+    log('Wiring up bower and injecting application');
+
+    return gulp.src(config.templateIndex)
         .pipe(wiredep({}))
+        // todo: control order of module.js etc
         .pipe(inject(gulp.src(config.allJs, {read: false})))
         .pipe(rename(config.index))
         .pipe(gulp.dest('./'));
+});
+
+gulp.task('less-styles', function() {
+    log('Compiling less ---> CSS');
+
+    return gulp.src(config.less)
+        .pipe(less())
+        .pipe(gulp.dest(config.tmp));
 });
 
 function log(msg) {
