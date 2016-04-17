@@ -2,13 +2,13 @@
     angular.module('app.services')
         .service('dashboardService', DashBoardService);
 
-        function DashBoardService(){
+        function DashBoardService($http, apiUrl){
             return {
                 testValues: testValues
             };
 
-            function testValues($http, baseUrl) {
-                return $http.get(baseUrl + 'values');
+            function testValues() {
+                return $http.get(apiUrl + 'values');
             }
         }
-}))();
+})();

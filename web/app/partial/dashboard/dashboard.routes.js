@@ -5,7 +5,7 @@
         .config(function($stateProvider){
             $stateProvider
                 .state('dashboard', {
-                    url: '/home',
+                    url: '/dashboard',
                     abstract: true,
                     templateUrl: 'app/partial/app.template.html'
                 })

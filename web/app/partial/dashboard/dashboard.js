@@ -8,7 +8,7 @@
             var vm = this;
             vm.msg = 'this is a message';
 
-            dashboardService.getValues()
+            dashboardService.testValues()
                 .then(function(resp){
                     vm.values = resp.data;
                 });

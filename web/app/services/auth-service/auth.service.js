@@ -28,10 +28,10 @@
                         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
             .then(function(response){
-                localStorageService.set('authorizationData', {token: response.access_token, userName: loginData.userName});
+                localStorageService.set('authorizationData', {token: response.data.access_token, userName: response.data.userName});
                 authentication.isAuth = true;
-                authentication.userName = loginData.userName;
-                localStorageService.set('userName', response.userName);
+                authentication.userName = response.data.userName;
+                localStorageService.set('userName', response.data.userName);
 
                 //var tokenPayload = jwtHelper.decodeToken(response.access_token);
                 //localStorageService.set('userName', tokenPayload.userName);

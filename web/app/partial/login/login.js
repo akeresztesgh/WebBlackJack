@@ -5,11 +5,13 @@
     function HomeCtrl($state, authService){
         var vm = this;
 
+        authService.logOut();
+
         vm.user = {};
         vm.login = function(){
             authService.login(vm.user)
                 .then(function(){
-                    alert('logged in !');
+                    $state.go('dashboard.dashboard');
                 }, function(){
                     alert('error!');
                 });

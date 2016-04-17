@@ -10,7 +10,7 @@
 
     app.config(function($locationProvider, $urlRouterProvider, localStorageServiceProvider) {
         $locationProvider.html5Mode(false);
-        //$urlRouterProvider.otherwise('/login');
+        $urlRouterProvider.otherwise('/dashboard');
         localStorageServiceProvider
             .setPrefix('WebBlackJack')
             .setStorageType('sessionStorage');
@@ -22,21 +22,22 @@
             return auth ? auth.token : null;
         }];
         $httpProvider.interceptors.push('jwtInterceptor');
+        $httpProvider.interceptors.push('authInterceptorService');
     });
 
     app.run(function($rootScope, $state, localStorageService, jwtHelper) {
         $rootScope.$on('$locationChangeStart', function() {
-            var token = localStorageService.get('authorizationData');
-            if(!token){
+            var auth = localStorageService.get('authorizationData');
+            if(!auth || !auth.token){
                 $state.go('login.login');
                 return;
             }
 
-            if (!jwtHelper.isTokenExpired(token)) {
-                $rootScope.$broadcast('login');
-            } else {
-                $state.go('login.login');
-            }
+            // if (!jwtHelper.isTokenExpired(token)) {
+            //     $rootScope.$broadcast('login');
+            // } else {
+            //     $state.go('login.login');
+            // }
         });
     });
 
