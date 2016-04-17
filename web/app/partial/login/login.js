@@ -2,16 +2,16 @@
     angular.module('app.partial')
     .controller('LoginCtrl', HomeCtrl);
 
-    function HomeCtrl(authService){
+    function HomeCtrl($state, authService){
         var vm = this;
 
         vm.user = {};
         vm.login = function(){
-            authService.login({})
+            authService.login(vm.user)
                 .then(function(){
-
+                    alert('logged in !');
                 }, function(){
-
+                    alert('error!');
                 });
         };
     }

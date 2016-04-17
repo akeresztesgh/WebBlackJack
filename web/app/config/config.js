@@ -3,5 +3,6 @@
     'use strict';
 
     angular.module('app')
-        .constant('apiUrl', 'http://localhost:1011/');
+        .constant('baseUrl', 'http://localhost:59111/')
+        .constant('apiUrl', 'http://localhost:59111/api/');
 })();
