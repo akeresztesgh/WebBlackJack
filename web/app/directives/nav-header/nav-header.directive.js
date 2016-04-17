@@ -16,8 +16,13 @@
         };
         return directive;
 
-        function NavController(){
-            
+        function NavController($state, authService){
+            var vm = this;
+            vm.userName = authService.userName();
+
+            vm.logout = function(){
+                $state.go('login.login');
+            };
         }
     }
 })();

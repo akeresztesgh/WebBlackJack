@@ -7,15 +7,11 @@
 
     function authService($http, $q, $log, localStorageService, baseUrl, jwtHelper) {
 
-        var authentication = {
-            isAuth: false,
-            userName : ''
-        };
-
         return {
             login : login,
             logOut : logOut,
-            authentication : authentication
+            userName: userName,
+            isLoggedIn: isLoggedIn
         };
 
         function login(loginData) {
@@ -29,8 +25,6 @@
             })
             .then(function(response){
                 localStorageService.set('authorizationData', {token: response.data.access_token, userName: response.data.userName});
-                authentication.isAuth = true;
-                authentication.userName = response.data.userName;
                 localStorageService.set('userName', response.data.userName);
 
                 //var tokenPayload = jwtHelper.decodeToken(response.access_token);
@@ -48,8 +42,15 @@
 
         function logOut() {
             localStorageService.clearAll();
-            authentication.isAuth = false;
-            authentication.userName = '';
+        }
+
+        function userName() {
+            var auth = localStorageService.get('authorizationData');
+            return auth ? auth.userName : 'N/A';
+        }
+
+        function isLoggedIn() {
+            return !!localStorageService.get('authorizationData');
         }
     }
 })();

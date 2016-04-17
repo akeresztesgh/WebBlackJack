@@ -5,6 +5,7 @@
     function HomeCtrl($state, authService){
         var vm = this;
 
+        // can't do this in auth-injector becuse it'll create a circular dependency
         authService.logOut();
 
         vm.user = {};
