@@ -1,6 +1,6 @@
 (function(){
     angular.module('app.directives', [])
-    .directive('navHeader', NavDirective)
+    .directive('navHeader', NavDirective);
 
     function NavDirective(){
         var directive = {
@@ -8,17 +8,13 @@
             controller: NavController,
             controllerAs: 'vm',
             restrict: 'EA',
-            scope: {
-                'navline': '=',
-                'noStorePicker': '='
-            },
             templateUrl: 'app/directives/nav-header/nav-header.html'
         };
         return directive;
 
-        function NavController($state, authService){
+        function NavController($state, userService){
             var vm = this;
-            vm.userName = authService.userName();
+            vm.userName = userService.userName();
 
             vm.logout = function(){
                 $state.go('login.login');

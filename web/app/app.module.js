@@ -27,11 +27,11 @@
 
     app.run(function($rootScope, $state, localStorageService, jwtHelper) {
         $rootScope.$on('$locationChangeStart', function() {
-            var auth = localStorageService.get('authorizationData');
-            if(!auth || !auth.token){
-                $state.go('login.login');
-                return;
-            }
+            // var auth = localStorageService.get('authorizationData');
+            // if(!auth || !auth.token){
+            //     $state.go('login.login');
+            //     return;
+            // }
 
             // if (!jwtHelper.isTokenExpired(token)) {
             //     $rootScope.$broadcast('login');

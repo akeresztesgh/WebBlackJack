@@ -1,0 +1,30 @@
+
+<div class='container-fluid'>
+    <div class='row'>
+        <div class='col-sm-12 col-md-5'>
+            <h2>Register New User</h2>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-sm-12 col-md-5'>
+            <form name='vm.regFrm' ng-submit='vm.register()' novalidate>
+                <div class='form-group'>
+                    <label for='email'>Email:</label>
+                    <input type='email' name='email' id='email' placeholder='Email' class='form-control' ng-model='vm.user.email'
+                           required>
+                </div>
+                <div class='form-group'>
+                    <label for='password'>Password:</label>
+                    <input type='password' name='password' id='password' placeholder='Password' ng-minlength='6' class='form-control'
+                           ng-model='vm.user.password' required>
+                </div>
+                <div class='form-group'>
+                    <label for='password'>Confirm Password:</label>
+                    <input type='password' name='confirmPassword' id='confirmPassword' placeholder='Confirm Password' class='form-control' ng-minlength='6'
+                           ng-model='vm.user.confirmPassword' required>
+                </div>
+                <input class='btn btn-default' type="submit" value="Submit" ng-disabled='vm.regFrm.$invalid || vm.user.password !== vm.user.confirmPassword'/>
+            </form>
+        </div>
+    </div>
+</div>
