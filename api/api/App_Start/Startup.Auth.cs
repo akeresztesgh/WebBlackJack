@@ -36,20 +36,9 @@ namespace api
             //app.UseCookieAuthentication(new CookieAuthenticationOptions());
             //app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
-            // Configure the application for OAuth based flow
-            PublicClientId = "self";
-            OAuthOptions = new OAuthAuthorizationServerOptions
-            {
-                TokenEndpointPath = new PathString("/Token"),
-                Provider = new ApplicationOAuthProvider(PublicClientId),
-                AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
-                // In production mode set AllowInsecureHttp = false
-                AllowInsecureHttp = true
-            };           
-
-            // Enable the application to use bearer tokens to authenticate users
-            app.UseOAuthBearerTokens(OAuthOptions);           
+            //Configure the application for OAuth based flow        
+            ConfigureOAuthForJWT(app);
+            ConfigureJWTConsumption(app);        
 
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
@@ -73,17 +62,18 @@ namespace api
 
         public void ConfigureOAuthForJWT(IAppBuilder app)
         {
-            OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
+            PublicClientId = "self";
+            OAuthOptions = new OAuthAuthorizationServerOptions
             {
+                TokenEndpointPath = new PathString("/Token"),
+                Provider = new ApplicationOAuthProvider(PublicClientId),
+                AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
+                AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
+                // In production mode set AllowInsecureHttp = false
                 AllowInsecureHttp = true,
-                TokenEndpointPath = new PathString("/token"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
-                Provider = new JWTOAuthServerProvider(),
                 AccessTokenFormat = new JWTFormat(ConfigurationManager.AppSettings["Issuer"])
             };
-
-            // Token Generation
-            app.UseOAuthAuthorizationServer(OAuthServerOptions);
+            app.UseOAuthAuthorizationServer(OAuthOptions);
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
         }
 
