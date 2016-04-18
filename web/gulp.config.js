@@ -10,11 +10,7 @@ module.exports = function(){
         index: './index.html',
         less: './app/app.less',
         css: tmp + '*.css',
-        tmp: tmp,
-        fonts: [
-            //'./bower_components/font-awesome/fonts/*.*',
-            './bower_components/bootstrap/fonts/*.*'
-        ],
+        tmp: tmp
     };
     return config;
 };
