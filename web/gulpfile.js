@@ -12,12 +12,10 @@ var jshint = require('gulp-jshint');
 var jshintStylish = require('jshint-stylish');
 
 // TODO: Add bundling / minify js & css...  browserify & babel?
-// TODO: auto-create app.less file imports, fix auto reload of less files
 
-gulp.task('serve', ['inject', 'less-watcher'], function(){
+gulp.task('serve', ['inject', 'less-watcher', 'fonts-debug'], function(){
     return gulp.src('')
         .pipe(liveReload({
-          //livereload: true,
           directoryListing: false,
           open: true,
           port: 1010,
@@ -51,6 +49,14 @@ gulp.task('wiredep', function(){
         .pipe(inject(series(appJs, modules, otherJs)))
         .pipe(rename(config.index))
         .pipe(gulp.dest('./'));
+});
+
+gulp.task('fonts-debug', function() {
+    log('Copying fonts');
+
+    return gulp
+        .src(config.fonts)
+        .pipe(gulp.dest(config.tmp + 'fonts'));
 });
 
 gulp.task('less-watcher', function() {
