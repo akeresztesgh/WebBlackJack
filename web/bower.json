@@ -21,6 +21,7 @@
     "bootstrap": "~3.3.6",
     "angular-local-storage": "~0.2.7",
     "angular-jwt": "~0.0.9",
-    "angularjs-toaster": "~2.0.0"
+    "angularjs-toaster": "~2.0.0",
+    "font-awesome": "~4.6.1"
   }
 }

@@ -53,6 +53,10 @@ gulp.task('wiredep', function(){
         .pipe(gulp.dest('./'));
 });
 
+gulp.task('less-watcher', function() {
+    gulp.watch([config.less], ['less-styles']);
+});
+
 gulp.task('less-styles', function() {
     log('Compiling less ---> CSS');
 
@@ -70,13 +74,9 @@ gulp.task('jshint', function(){
         .pipe(jshint.reporter('fail'));
 });
 
-gulp.task('less-watcher', function() {
-    gulp.watch([config.less], ['less-styles']);
-});
-
 
 gulp.task('clean', function(done){
-    return del([config.css], done);
+    return del([config.tmp+'*.*', config.tmp+'fonts/*.*'], done);
 });
 
 function log(msg) {
